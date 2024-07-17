@@ -1,9 +1,11 @@
 const hre = require("hardhat");
 
 async function main() {
-  const metaNFT = await hre.ethers.deployContract("MetaNFT");
 
-  console.log("MetaNFT address:", await metaNFT.getAddress());
+  const metaNFT = await hre.ethers.deployContract("MetaNFT");
+  const [signer] =   await hre.ethers.getSigners();
+
+  console.log(`${signer.address} deploys MetaNFT contract to address: ${await metaNFT.getAddress()}`);
 }
 
 main().catch((error) => {

@@ -10,7 +10,11 @@ async function main() {
   const mintTx = await metaNFT.safeMint(5);
   await mintTx.wait();
 
-  console.log(`${await metaNFT.balanceOf(ACCOUNT_ADDRESS)} MetaNFTs Minted to ${ACCOUNT_ADDRESS}`);
+  console.log(
+    `${await metaNFT.balanceOf(
+      ACCOUNT_ADDRESS
+    )} MetaNFTs Minted to ${ACCOUNT_ADDRESS}`
+  );
 }
 
 main().catch((error) => {

@@ -4,7 +4,6 @@ pragma solidity ^0.8.20;
 import "erc721a/contracts/ERC721A.sol";
 
 contract MetaNFT is ERC721A {
-    uint8 public maxSupply = 5;
 
     constructor() ERC721A("MetaNFT", "MNFT") {}
 
@@ -13,11 +12,11 @@ contract MetaNFT is ERC721A {
     }
 
     function _baseURI() internal pure override returns (string memory) {
-        return "ipfs://Qmf7i8TuFLa6GpNbngmH2dJhifTFZDj3Ab3iDy7Dx4e3Nc/";
+        return "https://ipfs.io/ipfs/QmQVQCaW65eFaHJ68hZbqnRF4xz5ifi4KF1qWEqVn5RNgB/1.png";
     }
 
     function promptDescription() external pure returns (string memory) {
-        return "Beautiful, awesome yet unique soccer balls";
+        return "This is a set of cute but powerful ninja cats";
     }
 
     function balanceOf(address owner) public view override returns (uint256) {
