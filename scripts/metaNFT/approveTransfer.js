@@ -2,11 +2,10 @@ const hre = require("hardhat");
 require("dotenv").config();
 const fxERC721RootContractABI = require("../../ERC721FxRootContractABI.json");
 
-const {
-  BRIDGE_ADDRESS,
-  CONTRACT_ADDRESS,
-  fxERC721RootAddress,
-} = process.env;
+const { ACCOUNT_ADDRESS, CONTRACT_ADDRESS } = process.env;
+
+fxERC721RootAddress = "0x9e688939cb5d484e401933d850207d6750852053";
+
 
 async function main() {
   const [deployer] = await hre.ethers.getSigners();
@@ -18,22 +17,23 @@ async function main() {
   // Approve NFTs for transfer
   const approveTx = await metaNFT
     .connect(deployer)
-    .setApprovalForAll(CONTRACT_ADDRESS, true);
+    .setApprovalForAll(fxERCdress, true);
 
   await approveTx.wait();
 
   console.log("Approval completed for the 5 NFTs");
 
-   const fxRootContract = await hre.ethers.getContractAt(
-     fxERC721RootContractABI,
-     fxERC721RootAddress
-   );
+  const fxRootContract = await hre.ethers.getContractAt(
+    fxERC721RootContractABI,
+    fxERC721RootAddress
+  );
 
   // Deposit NFTs to Polygon bridge
   for (let i = 0; i < 5; i++) {
-    const depositTx = await fxRootContract.connect(deployer).deposit(metaNFT.address, BRIDGE_ADDRESS, i, "0x6566");
+    const depositTx = await fxRootContract
+      .connect(deployer)
+      .deposit(CONTRACT_ADDRESS, ACCOUNT_ADDRESS, i, "0x6566");
     await depositTx.wait();
-
   }
 
   console.log("NFT transfterred to Polygon successfully");
